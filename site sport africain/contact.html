@@ -219,9 +219,6 @@
         </div>
     </footer>
 
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    
     <script>
         // Dropdown menu toggle
         function toggleMenu(menuId) {
@@ -242,52 +239,9 @@
                 });
             }
         };
-
-        // EmailJS Configuration
-        (function() {
-            emailjs.init("YOUR_PUBLIC_KEY"); // Remplacer par votre clé publique EmailJS
-        })();
-
-        // Form submission
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitBtn = document.getElementById('submit-btn');
-            const btnText = submitBtn.querySelector('.btn-text');
-            const btnLoading = submitBtn.querySelector('.btn-loading');
-            const formMessage = document.getElementById('form-message');
-            
-            // Show loading state
-            btnText.style.display = 'none';
-            btnLoading.style.display = 'inline';
-            submitBtn.disabled = true;
-            formMessage.textContent = '';
-            
-            // Send email via EmailJS
-            emailjs.sendForm('service_sport_africain', 'YOUR_TEMPLATE_ID', this)
-                .then(function() {
-                    // Success
-                    formMessage.style.color = '#1E7F4F';
-                    formMessage.textContent = '✓ Message envoyé avec succès !';
-                    document.getElementById('contact-form').reset();
-                    
-                    // Reset button
-                    btnText.style.display = 'inline';
-                    btnLoading.style.display = 'none';
-                    submitBtn.disabled = false;
-                }, function(error) {
-                    // Error
-                    formMessage.style.color = '#ff4444';
-                    formMessage.textContent = '✗ Erreur lors de l\'envoi. Veuillez réessayer.';
-                    console.error('EmailJS Error:', error);
-                    
-                    // Reset button
-                    btnText.style.display = 'inline';
-                    btnLoading.style.display = 'none';
-                    submitBtn.disabled = false;
-                });
-        });
     </script>
+
+    <script src="formsubmit-helper.js"></script>
     
     <!-- Chatbot -->
     <link rel="stylesheet" href="chatbot.css">
