@@ -10,7 +10,7 @@ const athletes = {
         flag: "🇸🇳",
         age: "32 ans",
         club: "Al Nassr",
-        image: "images/télécharger (70).jpeg",
+        image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&h=600&fit=crop",
         bio: "Sadio Mané est l'un des plus grands footballeurs africains. Vainqueur de la CAN et de la Ligue des Champions, il est reconnu pour sa vitesse, sa technique et son engagement humanitaire.",
         stats: {
             "Buts en carrière": "180+",
@@ -100,7 +100,7 @@ const athletes = {
         flag: "🇨🇲",
         age: "30 ans",
         club: "Philadelphia 76ers",
-        image: "images/télécharger (71).jpeg",
+        image: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&h=600&fit=crop",
         bio: "MVP NBA, Embiid est l'un des meilleurs pivots du monde. Sa domination des deux côtés du terrain fait de lui un joueur unique.",
         stats: {
             "Points par match": "30+",
