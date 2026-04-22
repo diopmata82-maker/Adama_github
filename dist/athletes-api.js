@@ -10,7 +10,7 @@ const athletesDatabase = {
         sport: "Football",
         country: "Sénégal",
         description: "Footballeur sénégalais évoluant au poste d'attaquant. Champion d'Afrique 2022 et Ballon d'Or africain.",
-        image: "télécharger (70).jpeg",
+        image: "images/télécharger (70).jpeg",
         achievements: ["Ballon d'Or africain 2022", "Champion d'Afrique 2022", "Vainqueur Ligue des Champions"]
     },
     "Joel_Embiid": {
@@ -18,7 +18,7 @@ const athletesDatabase = {
         sport: "Basketball",
         country: "Cameroun",
         description: "Pivot camerounais évoluant en NBA pour les Philadelphia 76ers. MVP de la saison 2022-2023.",
-        image: "télécharger (71).jpeg",
+        image: "images/télécharger (71).jpeg",
         achievements: ["MVP NBA 2023", "7x All-Star", "Champion olympique 2024"]
     },
     "Ferdinand_Omanyala": {
@@ -26,7 +26,7 @@ const athletesDatabase = {
         sport: "Athlétisme",
         country: "Kenya",
         description: "Sprinteur kenyan, détenteur du record d'Afrique du 100 mètres avec un temps de 9.77 secondes.",
-        image: "télécharger (72).jpeg",
+        image: "images/télécharger (72).jpeg",
         achievements: ["Record d'Afrique 100m (9.77s)", "Champion d'Afrique", "Champion du Commonwealth"]
     },
     "Eliud_Kipchoge": {
@@ -34,7 +34,7 @@ const athletesDatabase = {
         sport: "Athlétisme",
         country: "Kenya",
         description: "Marathonien kenyan, double champion olympique et détenteur du record du monde du marathon.",
-        image: "télécharger (72).jpeg",
+        image: "images/télécharger (72).jpeg",
         achievements: ["2x Champion olympique", "Record du monde marathon (2:01:09)", "Légende vivante"]
     }
 };

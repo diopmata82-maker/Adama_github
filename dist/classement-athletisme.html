@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <nav class="navbar">
+        <nav class="navbar">
         <div class="navbar-container">
             <div class="navbar-logo">
                 <a href="index.html">
@@ -39,8 +39,42 @@
                 <a href="contact.html" class="navbar-link">Contact</a>
                 <a href="abonnement.html" class="btn btn-subscribe">S'abonner</a>
             </div>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger-menu" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" class="mobile-menu-link">Accueil</a>
+        
+        <div class="dropdown-mobile">
+            <button class="dropdown-btn-mobile">
+                Actualités <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-content-mobile">
+                <a href="actualites.html">Toutes les actualités</a>
+                <a href="actualites-football.html">Football</a>
+                <a href="actualites-basketball.html">Basketball</a>
+                <a href="actualites-athletisme.html">Athlétisme</a>
+                <a href="actualites-lutte.html">Lutte</a>
+            </div>
+        </div>
+        
+        <a href="podcast.html" class="mobile-menu-link">Podcasts</a>
+        <a href="interview.html" class="mobile-menu-link">Interviews</a>
+        <a href="about.html" class="mobile-menu-link">À propos</a>
+        <a href="contact.html" class="mobile-menu-link">Contact</a>
+        
+        <div class="mobile-menu-actions">
+            <a href="abonnement.html" class="btn btn-subscribe">S'abonner</a>
+        </div>
+    </div>
 
     <section class="classement-page">
         <!-- HERO -->

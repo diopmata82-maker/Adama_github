@@ -370,7 +370,7 @@ const classementsData = {
                 nom: "Balla Gaye 2",
                 pays: "🇸🇳 Sénégal",
                 club: "Écurie Fass",
-                image: "télécharger (70).jpeg",
+                image: "images/télécharger (70).jpeg",
                 stats: ["🏅 Champion national", "💪 45 victoires"]
             },
             {
@@ -378,7 +378,7 @@ const classementsData = {
                 nom: "Modou Lô",
                 pays: "🇸🇳 Sénégal",
                 club: "Écurie Rock Énergie",
-                image: "télécharger (71).jpeg",
+                image: "images/télécharger (71).jpeg",
                 stats: ["🏅 Roi des arènes", "💪 52 victoires"]
             },
             {
@@ -386,7 +386,7 @@ const classementsData = {
                 nom: "Eumeu Sène",
                 pays: "🇸🇳 Sénégal",
                 club: "Écurie Lansar",
-                image: "télécharger (72).jpeg",
+                image: "images/télécharger (72).jpeg",
                 stats: ["🏅 Champion 2023", "💪 38 victoires"]
             },
             {
@@ -394,7 +394,7 @@ const classementsData = {
                 nom: "Tapha Tine",
                 pays: "🇸🇳 Sénégal",
                 club: "Écurie Fass",
-                image: "télécharger (73).jpeg",
+                image: "images/télécharger (73).jpeg",
                 stats: ["🏅 Vice-champion", "💪 32 victoires"]
             },
             {
@@ -402,7 +402,7 @@ const classementsData = {
                 nom: "Bombardier",
                 pays: "🇸🇳 Sénégal",
                 club: "Écurie Parcelles",
-                image: "télécharger (70).jpeg",
+                image: "images/télécharger (70).jpeg",
                 stats: ["🏅 Champion régional", "💪 28 victoires"]
             },
             {
@@ -410,7 +410,7 @@ const classementsData = {
                 nom: "Ama Baldé",
                 pays: "🇸🇳 Sénégal",
                 club: "Écurie Lansar",
-                image: "télécharger (71).jpeg",
+                image: "images/télécharger (71).jpeg",
                 stats: ["🏅 Finaliste 2024", "💪 35 victoires"]
             }
         ],

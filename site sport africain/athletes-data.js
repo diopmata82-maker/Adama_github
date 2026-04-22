@@ -10,7 +10,7 @@ const athletes = {
         flag: "🇸🇳",
         age: "32 ans",
         club: "Al Nassr",
-        image: "télécharger (70).jpeg",
+        image: "images/télécharger (70).jpeg",
         bio: "Sadio Mané est l'un des plus grands footballeurs africains. Vainqueur de la CAN et de la Ligue des Champions, il est reconnu pour sa vitesse, sa technique et son engagement humanitaire.",
         stats: {
             "Buts en carrière": "180+",
@@ -100,7 +100,7 @@ const athletes = {
         flag: "🇨🇲",
         age: "30 ans",
         club: "Philadelphia 76ers",
-        image: "télécharger (71).jpeg",
+        image: "images/télécharger (71).jpeg",
         bio: "MVP NBA, Embiid est l'un des meilleurs pivots du monde. Sa domination des deux côtés du terrain fait de lui un joueur unique.",
         stats: {
             "Points par match": "30+",
@@ -220,7 +220,7 @@ const athletes = {
         flag: "🇸🇳",
         age: "—",
         club: "—",
-        image: "télécharger (70).jpeg",
+        image: "images/télécharger (70).jpeg",
         bio: "Champion emblématique de la lutte sénégalaise. Connu pour sa puissance, sa technique et son charisme, il est l'un des lutteurs les plus populaires du Sénégal.",
         stats: {
             "Victoires": "20+",
@@ -250,7 +250,7 @@ const athletes = {
         flag: "🇸🇳",
         age: "—",
         club: "—",
-        image: "télécharger (72).jpeg",
+        image: "images/télécharger (72).jpeg",
         bio: "Ancien roi des arènes, Balla Gaye 2 a marqué l'histoire de la lutte sénégalaise avec une carrière légendaire remplie de victoires mémorables.",
         stats: {
             "Statut": "Champion",

@@ -38,8 +38,42 @@
                 <a href="contact.html" class="navbar-link">Contact</a>
                 <a href="abonnement.html" class="btn btn-subscribe">S'abonner</a>
             </div>
+            
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger-menu" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" class="mobile-menu-link">Accueil</a>
+        
+        <div class="dropdown-mobile">
+            <button class="dropdown-btn-mobile">
+                Actualités <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-content-mobile">
+                <a href="actualites.html">Toutes les actualités</a>
+                <a href="actualites-football.html">Football</a>
+                <a href="actualites-basketball.html">Basketball</a>
+                <a href="actualites-athletisme.html">Athlétisme</a>
+                <a href="actualites-lutte.html">Lutte</a>
+            </div>
+        </div>
+        
+        <a href="podcast.html" class="mobile-menu-link">Podcasts</a>
+        <a href="interview.html" class="mobile-menu-link">Interviews</a>
+        <a href="about.html" class="mobile-menu-link">À propos</a>
+        <a href="contact.html" class="mobile-menu-link">Contact</a>
+        
+        <div class="mobile-menu-actions">
+            <a href="abonnement.html" class="btn btn-subscribe">S'abonner</a>
+        </div>
+    </div>
 
     <section class="hero">
         <div class="hero-slider">
@@ -53,7 +87,7 @@
                 <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1920&h=1080&fit=crop" alt="Athlétisme" class="hero-slide-image">
             </div>
             <div class="hero-slide">
-                <img src="télécharger (70).jpeg" alt="Lutte" class="hero-slide-image">
+                <img src="images/télécharger (70).jpeg" alt="Lutte" class="hero-slide-image">
             </div>
         </div>
         <div class="hero-overlay"></div>
@@ -117,7 +151,7 @@
 
                 <a href="article.html?id=7" class="actualite-card">
                     <div class="actualite-image-wrapper">
-                        <img src="télécharger (70).jpeg" alt="Lutte Sénégal" class="actualite-image">
+                        <img src="images/télécharger (70).jpeg" alt="Lutte Sénégal" class="actualite-image">
                         <span class="actualite-category">Lutte</span>
                     </div>
                     <div class="actualite-content">
@@ -200,7 +234,7 @@
 
                 <a href="actualites.html" class="podcast-card">
                     <div class="podcast-image-container">
-                        <img src="télécharger (72).jpeg" alt="Lutte" class="podcast-image">
+                        <img src="images/télécharger (72).jpeg" alt="Lutte" class="podcast-image">
                     </div>
                     <div class="podcast-overlay"></div>
                     <div class="podcast-content">
@@ -358,7 +392,7 @@
                 <!-- Lutte -->
                 <div class="profile-card">
                     <div class="profile-image-wrapper">
-                        <img src="télécharger (70).jpeg" alt="Modou Lô" class="profile-image">
+                        <img src="images/télécharger (70).jpeg" alt="Modou Lô" class="profile-image">
                     </div>
                     <div class="profile-content">
                         <h3 class="profile-name">Modou Lô</h3>
@@ -370,7 +404,7 @@
 
                 <div class="profile-card">
                     <div class="profile-image-wrapper">
-                        <img src="télécharger (72).jpeg" alt="Balla Gaye 2" class="profile-image">
+                        <img src="images/télécharger (72).jpeg" alt="Balla Gaye 2" class="profile-image">
                     </div>
                     <div class="profile-content">
                         <h3 class="profile-name">Balla Gaye 2</h3>
@@ -412,7 +446,7 @@
             </a>
 
             <a href="classement-lutte.html" class="classement-card">
-                <img src="télécharger (70).jpeg" alt="Lutte">
+                <img src="images/télécharger (70).jpeg" alt="Lutte">
                 <div class="overlay">
                     <h3>Lutte</h3>
                     <p>Top lutteurs sénégalais</p>
@@ -539,6 +573,9 @@
     
     <!-- Script d'animations -->
     <script src="animations.js"></script>
+    
+    <!-- Hamburger Menu -->
+    <script src="hamburger-menu.js"></script>
     
     <!-- Chatbot -->
     <link rel="stylesheet" href="chatbot.css">

@@ -134,7 +134,7 @@ const articlesData = {
         title: "Sa Thiès s'impose comme roi des arènes",
         date: "10 Mars 2026",
         author: "Moussa Sow",
-        image: "télécharger (70).jpeg",
+        image: "images/télécharger (70).jpeg",
         content: `
             <p>Sa Thiès confirme son statut de roi des arènes avec une nouvelle victoire éclatante. Avec une puissance physique impressionnante, il domine ses adversaires et impose son style de combat.</p>
             
@@ -155,7 +155,7 @@ const articlesData = {
         title: "Modou Lô prêt pour un nouveau défi",
         date: "8 Mars 2026",
         author: "Moussa Sow",
-        image: "télécharger (71).jpeg",
+        image: "images/télécharger (71).jpeg",
         content: `
             <p>Modou Lô prépare activement son prochain combat avec une détermination sans faille. Le champion reste concentré sur ses objectifs et affiche une forme physique impressionnante.</p>
             
