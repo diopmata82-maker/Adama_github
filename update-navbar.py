@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page non trouvée - Sport Africain</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-        <nav class="navbar">
+#!/usr/bin/env python3
+"""
+Script to add hamburger menu to all HTML files
+"""
+import os
+import re
+
+def get_navbar_replacement():
+    """Return the new navbar HTML with hamburger menu"""
+    return """    <nav class="navbar">
         <div class="navbar-container">
             <div class="navbar-logo">
                 <a href="index.html">
@@ -73,39 +73,78 @@
         <div class="mobile-menu-actions">
             <a href="abonnement.html" class="btn btn-subscribe">S'abonner</a>
         </div>
-    </div>
+    </div>"""
 
-    <!-- Page 404 -->
-    <section class="error-page">
-        <div class="error-container">
-            <h1 class="error-code">404</h1>
-            <h2 class="error-title">Page non trouvée</h2>
-            <p class="error-message">La page que vous cherchez n'existe pas.</p>
-            <button class="btn-error" onclick="window.location.href='index.html'">Retour à l'accueil</button>
-        </div>
-    </section>
+def find_navbar_end(content):
+    """Find the end of navbar section"""
+    match = re.search(r'</nav>\s*', content)
+    if match:
+        return match.end()
+    return None
 
-    <script>
-        // Dropdown menu toggle
-        function toggleMenu(menuId) {
-            const menu = document.getElementById(menuId);
-            if (menu) {
-                menu.classList.toggle('show');
-            }
-        }
+def update_html_file(filepath):
+    """Update a single HTML file with hamburger menu"""
+    if os.path.basename(filepath) == 'index.html':
+        return False  # Skip index.html as it's already updated
+    
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # Check if already has hamburger menu
+    if 'hamburger-menu' in content:
+        return False
+    
+    # Check if it has navbar-container
+    if 'navbar-container' not in content:
+        return False
+    
+    # Find the start of navbar
+    navbar_start = content.find('<nav class="navbar">')
+    if navbar_start == -1:
+        return False
+    
+    # Find the end of navbar
+    navbar_end = content.find('</nav>', navbar_start)
+    if navbar_end == -1:
+        return False
+    
+    navbar_end += len('</nav>')
+    
+    # Get the new navbar
+    new_navbar = get_navbar_replacement()
+    
+    # Check if file ends with hamburger-menu.js script
+    has_hamburger_script = 'hamburger-menu.js' in content
+    
+    # Replace the navbar
+    new_content = content[:navbar_start] + new_navbar + content[navbar_end:]
+    
+    # Add hamburger script if not present
+    if not has_hamburger_script:
+        # Find animations.js to add hamburger-menu.js after it
+        insert_pos = new_content.find('<!-- Chatbot -->')
+        if insert_pos != -1:
+            script_tag = '\n    <!-- Hamburger Menu -->\n    <script src="hamburger-menu.js"></script>\n    '
+            new_content = new_content[:insert_pos] + script_tag + new_content[insert_pos:]
+    
+    # Write the updated content
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(new_content)
+    
+    return True
 
-        // Close dropdown when clicking outside
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                const dropdowns = document.getElementsByClassName('dropdown-content');
-                for (let i = 0; i < dropdowns.length; i++) {
-                    const openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-    </script>
-</body>
-</html>
+# Main
+if __name__ == '__main__':
+    base_dir = "/home/mouhamadou-lamine/Musique/site sport africain (2)/site sport africain"
+    updated_count = 0
+    
+    for filename in sorted(os.listdir(base_dir)):
+        if filename.endswith('.html'):
+            filepath = os.path.join(base_dir, filename)
+            if update_html_file(filepath):
+                print(f'✓ Updated: {filename}')
+                updated_count += 1
+            else:
+                print(f'- Skipped: {filename}')
+    
+    print(f'\nTotal files updated: {updated_count}')

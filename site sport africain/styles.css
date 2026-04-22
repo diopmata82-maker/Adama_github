@@ -4582,3 +4582,790 @@ html {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* ========================================
+   HAMBURGER MENU - RESPONSIVE MOBILE
+   ======================================== */
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 6px;
+    background: none;
+    border: none;
+    padding: 0;
+    z-index: 1001;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile Menu Container */
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+    z-index: 999;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu.show {
+    display: flex;
+}
+
+.mobile-menu-link {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: color 0.3s ease;
+}
+
+.mobile-menu-link:hover {
+    color: #ffffff;
+    padding-left: 8px;
+}
+
+.mobile-menu .dropdown-mobile {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu .dropdown-btn-mobile {
+    background: none;
+    border: none;
+    color: #cccccc;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 12px 0;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.mobile-menu .dropdown-btn-mobile:hover {
+    color: #ffffff;
+}
+
+.mobile-menu .dropdown-content-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0 0 20px;
+    border-left: 2px solid #1E7F4F;
+    margin-top: 10px;
+}
+
+.mobile-menu .dropdown-content-mobile.show {
+    display: flex;
+}
+
+.mobile-menu .dropdown-content-mobile a {
+    color: #a3a3a3;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 8px 0;
+    transition: color 0.3s ease;
+}
+
+.mobile-menu .dropdown-content-mobile a:hover {
+    color: #1E7F4F;
+}
+
+.mobile-menu-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-actions .navbar-link {
+    color: #cccccc;
+    font-size: 16px;
+}
+
+.mobile-menu-actions .btn {
+    padding: 12px 24px;
+    text-align: center;
+}
+
+/* ========================================
+   RESPONSIVE BREAKPOINTS OPTIMISÉS
+   ======================================== */
+
+/* Extra Large Screens (1400px+) */
+@media (max-width: 1400px) {
+    .navbar-container,
+    .actualites-container,
+    .podcasts-episodes-container,
+    .interviews-page-container,
+    .classement-container,
+    .profil-container,
+    .profiles-container,
+    .profiles-section,
+    .classement-home {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+}
+
+/* Large Tablets (1024px - 1399px) */
+@media (max-width: 1024px) {
+    .navbar-container {
+        padding: 15px 30px;
+    }
+    
+    .navbar-menu {
+        gap: 20px;
+        font-size: 15px;
+    }
+    
+    .navbar-logo img {
+        height: 40px;
+    }
+    
+    .actualites-container,
+    .podcasts-episodes-container {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    
+    .actualites-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+    
+    .hero-content {
+        margin-left: 60px;
+    }
+    
+    .hero-title {
+        font-size: 48px;
+    }
+    
+    .hero-description {
+        font-size: 17px;
+    }
+}
+
+/* Tablets Portrait (768px - 1023px) */
+@media (max-width: 768px) {
+    /* Navbar */
+    .navbar-container {
+        padding: 12px 15px;
+        justify-content: space-between;
+    }
+    
+    .navbar-menu {
+        display: none;
+    }
+    
+    .navbar-actions {
+        display: none;
+    }
+    
+    .hamburger-menu {
+        display: flex;
+    }
+    
+    .navbar-logo img {
+        height: 35px;
+    }
+    
+    /* Hero Section */
+    .hero {
+        min-height: 500px;
+        height: auto;
+    }
+    
+    .hero-content {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 40px 20px;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .hero-badge {
+        font-size: 11px;
+        padding: 6px 12px;
+    }
+    
+    .hero-title {
+        font-size: 32px;
+        line-height: 1.2;
+        margin-bottom: 16px;
+    }
+    
+    .hero-description {
+        font-size: 15px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-hero {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+    
+    /* Sections */
+    .actualites-container,
+    .podcasts-episodes-container,
+    .interviews-page-container,
+    .classement-container,
+    .profil-container,
+    .profiles-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .actualites {
+        padding: 60px 0;
+    }
+    
+    .actualites-title {
+        font-size: 36px;
+    }
+    
+    .actualites-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    /* Grilles Responsive */
+    .profiles-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .classement-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .interviews-page-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .ranking-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .profil-main {
+        grid-template-columns: 1fr;
+    }
+    
+    .profil-image-card {
+        grid-column: 1;
+        grid-row: auto;
+    }
+    
+    .profil-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .profil-articles-grid,
+    .profil-related-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Back Button */
+    .back-btn {
+        top: 70px;
+        left: 15px;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+/* Mobile Landscape & Small Tablets (640px - 767px) */
+@media (max-width: 640px) {
+    /* Navbar */
+    .navbar-container {
+        padding: 10px 12px;
+    }
+    
+    .navbar-logo img {
+        height: 32px;
+    }
+    
+    /* Hero */
+    .hero {
+        min-height: 400px;
+    }
+    
+    .hero-content {
+        padding: 30px 15px;
+    }
+    
+    .hero-badge {
+        font-size: 10px;
+        padding: 5px 10px;
+        margin-bottom: 12px;
+    }
+    
+    .hero-title {
+        font-size: 28px;
+        margin-bottom: 12px;
+    }
+    
+    .hero-description {
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+    
+    .btn-hero {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+    
+    /* Sections */
+    .actualites {
+        padding: 40px 0;
+    }
+    
+    .actualites-container,
+    .classement-container,
+    .profil-container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .actualites-title {
+        font-size: 28px;
+    }
+    
+    .actualites-subtitle {
+        font-size: 16px;
+    }
+    
+    .actualites-grid {
+        gap: 16px;
+    }
+    
+    .actualite-content {
+        padding: 16px;
+    }
+    
+    .actualite-title {
+        font-size: 16px;
+    }
+    
+    /* Cards */
+    .ranking-card {
+        margin-bottom: 15px;
+    }
+    
+    .ranking-image {
+        height: 300px;
+    }
+    
+    /* Typography */
+    .actualites-title,
+    .section-title,
+    .classement-hero-title {
+        font-size: 26px;
+    }
+    
+    /* Tables */
+    .stats-table {
+        font-size: 13px;
+    }
+    
+    .stats-table th,
+    .stats-table td {
+        padding: 10px 6px;
+    }
+    
+    /* Profile */
+    .profil-name {
+        font-size: 28px;
+    }
+    
+    .profil-country {
+        font-size: 16px;
+    }
+    
+    .profil-image-card,
+    .profil-bio-card {
+        padding: 20px;
+    }
+    
+    .profil-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .stat-item {
+        padding: 12px;
+    }
+    
+    /* Breadcrumb */
+    .breadcrumb-container {
+        padding: 0 15px;
+        font-size: 12px;
+    }
+    
+    .back-btn {
+        top: 60px;
+        left: 10px;
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    
+    /* Checkboxes */
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .abonnement-form-wrapper {
+        padding: 24px 16px;
+    }
+}
+
+/* Small Mobile (480px - 639px) */
+@media (max-width: 480px) {
+    /* Navbar */
+    .navbar {
+        position: sticky;
+    }
+    
+    .navbar-container {
+        padding: 8px 10px;
+    }
+    
+    .navbar-logo img {
+        height: 28px;
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu {
+        top: 60px;
+        padding: 15px;
+    }
+    
+    .mobile-menu-link {
+        font-size: 15px;
+        padding: 10px 0;
+    }
+    
+    /* Hero */
+    .hero {
+        min-height: 350px;
+    }
+    
+    .hero-content {
+        padding: 25px 12px;
+    }
+    
+    .hero-badge {
+        font-size: 9px;
+        padding: 4px 8px;
+    }
+    
+    .hero-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .hero-description {
+        font-size: 13px;
+        line-height: 1.4;
+        margin-bottom: 15px;
+    }
+    
+    .btn-hero {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+    
+    /* Sections */
+    .actualites {
+        padding: 30px 0;
+    }
+    
+    .actualites-container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    
+    .actualites-title {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+    
+    .actualites-subtitle {
+        font-size: 14px;
+    }
+    
+    .actualites-grid {
+        gap: 12px;
+    }
+    
+    .actualite-image-wrapper {
+        height: 160px;
+    }
+    
+    .actualite-content {
+        padding: 14px;
+    }
+    
+    .actualite-date {
+        font-size: 12px;
+    }
+    
+    .actualite-title {
+        font-size: 15px;
+        margin-bottom: 6px;
+    }
+    
+    .actualite-excerpt {
+        font-size: 13px;
+    }
+    
+    .read-more {
+        font-size: 12px;
+    }
+    
+    .actualite-category {
+        font-size: 9px;
+        padding: 4px 8px;
+    }
+    
+    /* Tables */
+    .stats-table {
+        font-size: 12px;
+    }
+    
+    .stats-table th,
+    .stats-table td {
+        padding: 8px 4px;
+    }
+    
+    /* Profile Page */
+    .profil-page {
+        margin-top: 60px;
+    }
+    
+    .profil-hero {
+        height: 300px;
+    }
+    
+    .profil-name {
+        font-size: 24px;
+    }
+    
+    .profil-country {
+        font-size: 14px;
+    }
+    
+    .profil-sport {
+        font-size: 12px;
+    }
+    
+    .profil-container {
+        padding: 30px 12px;
+    }
+    
+    .profil-image-card,
+    .profil-bio-card,
+    .profil-stats-card {
+        padding: 16px;
+    }
+    
+    .profil-bio-card h2,
+    .profil-stats-card h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .stat-value {
+        font-size: 18px;
+    }
+    
+    /* Forms */
+    .abonnement-form-wrapper {
+        padding: 20px 14px;
+    }
+    
+    .checkbox-label {
+        font-size: 14px;
+        gap: 8px;
+    }
+    
+    .checkbox-label input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+    }
+    
+    /* Back Button */
+    .back-btn {
+        top: 55px;
+        left: 8px;
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+    
+    /* Breadcrumb */
+    .breadcrumb-container {
+        padding: 0 12px;
+        font-size: 11px;
+        gap: 8px;
+    }
+    
+    .breadcrumb-link,
+    .breadcrumb-separator,
+    .breadcrumb-current {
+        font-size: 11px;
+    }
+}
+
+/* Extra Small Mobile (375px - 479px) */
+@media (max-width: 375px) {
+    /* Navbar */
+    .navbar-container {
+        padding: 6px 8px;
+    }
+    
+    .navbar-logo img {
+        height: 24px;
+    }
+    
+    /* Hero */
+    .hero {
+        min-height: 300px;
+    }
+    
+    .hero-content {
+        padding: 20px 10px;
+    }
+    
+    .hero-badge {
+        font-size: 8px;
+        padding: 3px 6px;
+        margin-bottom: 8px;
+    }
+    
+    .hero-title {
+        font-size: 20px;
+        margin-bottom: 8px;
+        line-height: 1.15;
+    }
+    
+    .hero-description {
+        font-size: 12px;
+        line-height: 1.3;
+        margin-bottom: 12px;
+    }
+    
+    .btn-hero {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    /* Sections */
+    .actualites {
+        padding: 20px 0;
+    }
+    
+    .actualites-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .actualites-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .actualites-subtitle {
+        font-size: 13px;
+    }
+    
+    .actualite-image-wrapper {
+        height: 140px;
+    }
+    
+    .actualite-content {
+        padding: 12px;
+    }
+    
+    .actualite-date {
+        font-size: 11px;
+    }
+    
+    .actualite-title {
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+    
+    .actualite-excerpt {
+        font-size: 12px;
+        display: none;
+    }
+    
+    .read-more {
+        font-size: 11px;
+    }
+    
+    .profil-name {
+        font-size: 20px;
+    }
+    
+    .profil-container {
+        padding: 20px 10px;
+    }
+    
+    .profil-image-card,
+    .profil-bio-card {
+        padding: 12px;
+    }
+    
+    .stat-value {
+        font-size: 16px;
+    }
+    
+    .stat-label {
+        font-size: 10px;
+    }
+}

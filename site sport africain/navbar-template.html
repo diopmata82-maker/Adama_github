@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page non trouvée - Sport Africain</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-        <nav class="navbar">
+    <nav class="navbar">
         <div class="navbar-container">
             <div class="navbar-logo">
                 <a href="index.html">
@@ -74,38 +65,3 @@
             <a href="abonnement.html" class="btn btn-subscribe">S'abonner</a>
         </div>
     </div>
-
-    <!-- Page 404 -->
-    <section class="error-page">
-        <div class="error-container">
-            <h1 class="error-code">404</h1>
-            <h2 class="error-title">Page non trouvée</h2>
-            <p class="error-message">La page que vous cherchez n'existe pas.</p>
-            <button class="btn-error" onclick="window.location.href='index.html'">Retour à l'accueil</button>
-        </div>
-    </section>
-
-    <script>
-        // Dropdown menu toggle
-        function toggleMenu(menuId) {
-            const menu = document.getElementById(menuId);
-            if (menu) {
-                menu.classList.toggle('show');
-            }
-        }
-
-        // Close dropdown when clicking outside
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                const dropdowns = document.getElementsByClassName('dropdown-content');
-                for (let i = 0; i < dropdowns.length; i++) {
-                    const openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-    </script>
-</body>
-</html>
