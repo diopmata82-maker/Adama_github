@@ -418,10 +418,27 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Récupérer l'ID de l'article depuis l'URL
             const params = new URLSearchParams(window.location.search);
-            const id = parseInt(params.get("id"));
+            const rawId = (params.get("id") || "").trim();
+            const articleAliases = {
+                football1: 1,
+                football2: 2,
+                football3: 9,
+                basketball1: 3,
+                basketball2: 4,
+                basketball3: 10,
+                athletisme1: 5,
+                athletisme2: 6,
+                athletisme3: 6,
+                lutte1: 7,
+                lutte2: 8,
+                lutte3: 7
+            };
+            const normalizedId = /^\d+$/.test(rawId)
+                ? parseInt(rawId, 10)
+                : articleAliases[rawId.toLowerCase()];
             
             // Récupérer l'article
-            const article = articlesData[id];
+            const article = articlesData[normalizedId];
             
             // Sécurité
             if (!article) {
