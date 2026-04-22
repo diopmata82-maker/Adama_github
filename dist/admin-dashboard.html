@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f9f9f9;
+            min-height: 100vh;
+        }
+
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 260px;
+            background: #111;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+        }
+
+        .sidebar-logo {
+            padding: 30px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-logo img {
+            height: 40px;
+            filter: brightness(0) invert(1);
+        }
+
+        .sidebar-menu {
+            flex: 1;
+            padding: 24px 0;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 24px;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .menu-item:hover {
+            background: rgba(255,255,255,0.05);
+            color: white;
+        }
+
+        .menu-item.active {
+            background: rgba(15, 120, 60, 0.15);
+            color: #0f783c;
+            border-left-color: #0f783c;
+        }
+
+        .menu-icon {
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-footer {
+            padding: 24px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-logout {
+            width: 100%;
+            background: rgba(220, 53, 69, 0.15);
+            color: #ff6b7a;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-logout:hover {
+            background: rgba(220, 53, 69, 0.25);
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+        .header {
+            background: white;
+            padding: 24px 40px;
+            border-bottom: 1px solid #e8e8e8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title h1 {
+            color: #1a1a1a;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .header-title p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-primary {
+            background: #0f783c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: #0a5a2d;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(15, 120, 60, 0.3);
+        }
+
+        /* CONTENT */
+        .content {
+            flex: 1;
+            padding: 40px;
+        }
+
+        /* STATS GRID */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: all 0.3s;
+            border: 1px solid #f0f0f0;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .stat-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #0f783c, #0a5a2d);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+        }
+
+        .stat-info {
+            flex: 1;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        /* RECENT ARTICLES */
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #f0f0f0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+
+        .section-title {
+            color: #1a1a1a;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .btn-link {
+            color: #0f783c;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-link:hover {
+            color: #0a5a2d;
+        }
+
+        /* TABLE */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f9f9f9;
+        }
+
+        th {
+            padding: 14px 16px;
+            text-align: left;
+            color: #666;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #e8e8e8;
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #333;
+            font-size: 14px;
+        }
+
+        tbody tr {
+            transition: all 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #f9f9f9;
+        }
+
+        .article-title {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .category-football {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .category-basketball {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .category-athletisme {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .category-lutte {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .btn-edit {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .btn-edit:hover {
+            background: #ffe0b2;
+        }
+
+        .btn-delete {
+            background: #ffebee;
+            color: #d32f2f;
+        }
+
+        .btn-delete:hover {
+            background: #ffcdd2;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+
+            .sidebar-logo img {
+                height: 30px;
+            }
+
+            .menu-text {
+                display: none;
+            }
+
+            .sidebar-footer {
+                padding: 12px;
+            }
+
+            .btn-logout span {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 70px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="images/version logo sport africain_logo original.png" alt="Sport Africain">
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="admin-dashboard.html" class="menu-item active">
+                    <span class="menu-icon">📊</span>
+                    <span class="menu-text">Dashboard</span>
+                </a>
+                <a href="admin-articles.html" class="menu-item">
+                    <span class="menu-icon">📰</span>
+                    <span class="menu-text">Articles</span>
+                </a>
+                <a href="admin-profiles.html" class="menu-item">
+                    <span class="menu-icon">👤</span>
+                    <span class="menu-text">Profils</span>
+                </a>
+                <a href="index.html" class="menu-item">
+                    <span class="menu-icon">🏠</span>
+                    <span class="menu-text">Voir le site</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">
+                    <span>🚪</span>
+                    <span>Déconnexion</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- HEADER -->
+            <header class="header">
+                <div class="header-title">
+                    <h1>Dashboard</h1>
+                    <p id="welcome-text">Bienvenue sur votre tableau de bord</p>
+                </div>
+                <div class="header-actions">
+                    <a href="admin-create-article.html" class="btn-primary">
+                        <span>➕</span>
+                        <span>Nouvel article</span>
+                    </a>
+                </div>
+            </header>
+
+            <!-- CONTENT -->
+            <div class="content">
+                <!-- STATS -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon">📰</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Articles</div>
+                                <div class="stat-number" id="articles-count">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon">👤</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Profils</div>
+                                <div class="stat-number" id="profiles-count">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-info">
+                                <div class="stat-label">Disciplines</div>
+                                <div class="stat-number">4</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECENT ARTICLES -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Articles récents</h2>
+                        <a href="admin-articles.html" class="btn-link">Voir tout →</a>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Catégorie</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-articles">
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="empty-state">
+                                            <div class="empty-icon">📰</div>
+                                            <p>Chargement des articles...</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="auth-helper.js"></script>
+    <script src="api-client.js"></script>
+    <script>
+        // Vérifier authentification
+        AuthHelper.protectPage();
+
+        // Afficher le nom de l'admin
+        const adminData = AuthHelper.getAdminData();
+        if (adminData) {
+            document.getElementById('welcome-text').textContent = `Bienvenue, ${adminData.name}`;
+        }
+
+        // Charger les statistiques
+        async function loadStats() {
+            try {
+                const articles = await ArticlesAPI.getAll();
+                document.getElementById('articles-count').textContent = articles.length;
+
+                const athletes = await AthletesAPI.getAll();
+                document.getElementById('profiles-count').textContent = athletes.length;
+
+                // Charger les 5 derniers articles
+                loadRecentArticles(articles.slice(0, 5));
+            } catch (error) {
+                console.error('Erreur chargement stats:', error);
+            }
+        }
+
+        // Charger les articles récents
+        function loadRecentArticles(articles) {
+            const tbody = document.getElementById('recent-articles');
+
+            if (articles.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="4">
+                            <div class="empty-state">
+                                <div class="empty-icon">📰</div>
+                                <p>Aucun article pour le moment</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = articles.map(article => {
+                const date = new Date(article.date).toLocaleDateString('fr-FR', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                });
+
+                return `
+                    <tr>
+                        <td class="article-title">${article.title}</td>
+                        <td><span class="category-badge category-${article.category}">${article.category}</span></td>
+                        <td>${date}</td>
+                        <td>
+                            <div class="actions">
+                                <button class="btn-icon btn-edit" onclick="editArticle('${article._id}')" title="Modifier">✏️</button>
+                                <button class="btn-icon btn-delete" onclick="deleteArticle('${article._id}')" title="Supprimer">🗑️</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function editArticle(id) {
+            alert('Fonctionnalité de modification à venir');
+        }
+
+        async function deleteArticle(id) {
+            if (!confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
+                return;
+            }
+
+            try {
+                await AdminAPI.deleteArticle(id);
+                alert('Article supprimé avec succès');
+                loadStats();
+            } catch (error) {
+                alert('Erreur lors de la suppression: ' + error.message);
+            }
+        }
+
+        function logout() {
+            AuthHelper.logout();
+        }
+
+        loadStats();
+    </script>
+</body>
+</html>

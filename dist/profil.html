@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Athlète - Sport Africain</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Styles spécifiques pour la page profil */
+        .profil-hero {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+        }
+        
+        .profil-hero-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profil-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .profil-hero-content {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 20px;
+        }
+        
+        .profil-sport-badge {
+            display: inline-block;
+            background: #0F783C;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .profil-hero-name {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        
+        .profil-hero-country {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        
+        .profil-info-section {
+            background: white;
+            padding: 60px 20px;
+        }
+        
+        .profil-info-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .profil-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+        
+        .profil-info-item {
+            text-align: center;
+            padding: 24px;
+            background: #f8f8f8;
+            border-radius: 14px;
+        }
+        
+        .profil-info-label {
+            color: #666;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .profil-info-value {
+            color: #1a1a1a;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .profil-bio-section {
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+        
+        .profil-section-title {
+            color: #1a1a1a;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+        
+        .profil-bio-text {
+            color: #333;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        
+        .profil-stats-section {
+            background: #f8f8f8;
+            padding: 60px 20px;
+        }
+        
+        .profil-stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .profil-stats-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .profil-stat-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            width: 220px;
+        }
+        
+        .profil-stat-value {
+            color: #0F783C;
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .profil-stat-label {
+            color: #666;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .profil-achievements-section {
+            background: white;
+            padding: 60px 20px;
+        }
+        
+        .profil-achievements-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .profil-achievements-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .profil-achievements-list li {
+            color: #333;
+            font-size: 18px;
+            padding: 16px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .profil-articles-section {
+            background: #f8f8f8;
+            padding: 80px 20px;
+        }
+        
+        .profil-articles-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .profil-articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+        
+        .profil-cta-section {
+            background: linear-gradient(135deg, #0F783C 0%, #1a1a1a 100%);
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .profil-cta-title {
+            color: white;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .profil-cta-text {
+            color: rgba(255,255,255,0.9);
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+        
+        .profil-cta-button {
+            display: inline-block;
+            background: #F4A300;
+            color: #1a1a1a;
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        
+        .profil-cta-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .profil-hero {
+                height: 400px;
+            }
+            
+            .profil-hero-name {
+                font-size: 36px;
+            }
+            
+            .profil-info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profil-stat-value {
+                font-size: 36px;
+            }
+            
+            .profil-cta-title {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <a href="index.html">
+                    <img src="images/version logo sport africain_logo original.png" alt="Sport Africain">
+                </a>
+            </div>
+            
+            <div class="navbar-menu">
+                <a href="index.html" class="navbar-link">Accueil</a>
+                
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="toggleMenu('actualites-menu')">Actualités ▼</button>
+                    <div id="actualites-menu" class="dropdown-content">
+                        <a href="actualites.html">Toutes les actualités</a>
+                        <a href="actualites-football.html">Football</a>
+                        <a href="actualites-basketball.html">Basketball</a>
+                        <a href="actualites-athletisme.html">Athlétisme</a>
+                        <a href="actualites-lutte.html">Lutte</a>
+                    </div>
+                </div>
+                
+                <a href="podcast.html" class="navbar-link">Podcasts</a>
+                <a href="interview.html" class="navbar-link">Interviews</a>
+                <a href="about.html" class="navbar-link">À propos</a>
+            </div>
+            
+            <div class="navbar-actions">
+                <a href="contact.html" class="navbar-link">Contact</a>
+                <a href="abonnement.html" class="btn btn-subscribe">S'abonner</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Profil -->
+    <section class="profil-hero">
+        <img id="profil-hero-bg" src="" alt="Athlète" class="profil-hero-bg">
+        <div class="profil-hero-overlay">
+            <div class="profil-hero-content">
+                <span id="profil-sport-badge" class="profil-sport-badge">Sport</span>
+                <h1 id="profil-hero-name" class="profil-hero-name">Nom de l'athlète</h1>
+                <p id="profil-hero-country" class="profil-hero-country">🌍 Pays</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Informations rapides -->
+    <section class="profil-info-section">
+        <div class="profil-info-container">
+            <div id="profil-info-grid" class="profil-info-grid">
+                <!-- Chargé dynamiquement -->
+            </div>
+
+            <!-- Biographie -->
+            <div class="profil-bio-section">
+                <h2 class="profil-section-title">📖 Biographie</h2>
+                <p id="profil-bio-text" class="profil-bio-text"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistiques -->
+    <section class="profil-stats-section">
+        <div class="profil-stats-container">
+            <h2 class="profil-section-title" style="text-align:center;">📊 Statistiques</h2>
+            <div id="profil-stats-grid" class="profil-stats-grid">
+                <!-- Chargé dynamiquement -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Palmarès -->
+    <section class="profil-achievements-section">
+        <div class="profil-achievements-container">
+            <h2 class="profil-section-title">🏆 Palmarès</h2>
+            <ul id="profil-achievements-list" class="profil-achievements-list">
+                <!-- Chargé dynamiquement -->
+            </ul>
+        </div>
+    </section>
+
+    <!-- Articles liés -->
+    <section class="profil-articles-section">
+        <div class="profil-articles-container">
+            <h2 class="profil-section-title" style="text-align:center;">📰 Articles liés</h2>
+            <div id="profil-articles-grid" class="profil-articles-grid">
+                <!-- Chargé dynamiquement -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="profil-cta-section">
+        <div class="profil-cta-container">
+            <h2 class="profil-cta-title">Restez connecté</h2>
+            <p class="profil-cta-text">Ne manquez aucune actualité du sport africain</p>
+            <a href="abonnement.html" class="profil-cta-button">S'abonner maintenant</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="images/version logo sport africain_logo original.png" alt="Sport Africain">
+                    </div>
+                    <p class="footer-description">Votre source d'information pour le sport africain. Actualités, analyses et résultats en temps réel.</p>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com/sportafricainpro" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@sport.africainpro" target="_blank" rel="noopener" class="social-link" aria-label="TikTok">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.youtube.com/channel/UCAzMpv33cUXSHXAWRg_L7hA" target="_blank" rel="noopener" class="social-link" aria-label="YouTube">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                            </svg>
+                        </a>
+                        <a href="https://web.facebook.com/profile.php?id=61576432925557" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4 class="footer-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html" class="footer-link">Accueil</a></li>
+                        <li><a href="about.html" class="footer-link">À propos</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4 class="footer-title">Actualités</h4>
+                    <ul class="footer-links">
+                        <li><a href="actualites.html" class="footer-link">Toutes les actualités</a></li>
+                        <li><a href="actualites-football.html" class="footer-link">Football</a></li>
+                        <li><a href="actualites-basketball.html" class="footer-link">Basketball</a></li>
+                        <li><a href="actualites-athletisme.html" class="footer-link">Athlétisme</a></li>
+                        <li><a href="actualites-lutte.html" class="footer-link">Lutte</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4 class="footer-title">Newsletter</h4>
+                    <p class="footer-description">Recevez les dernières actualités directement dans votre boîte mail.</p>
+                    <form class="footer-newsletter-form" action="abonnement-success.html" method="get">
+                        <input type="email" class="footer-newsletter-input" placeholder="Votre email" required>
+                        <button type="submit" class="footer-newsletter-button">S'abonner</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2026 Sport Africain. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="athletes-data.js"></script>
+    <script src="articles-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Récupérer l'ID de l'athlète depuis l'URL
+            const params = new URLSearchParams(window.location.search);
+            const athleteId = params.get("id") || "mane";
+
+            // Charger l'athlète
+            const athlete = getAthleteById(athleteId);
+
+            if (!athlete) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Mettre à jour le titre
+            document.title = `${athlete.name} - Sport Africain`;
+
+            // Hero
+            document.getElementById('profil-hero-bg').src = athlete.image;
+            document.getElementById('profil-sport-badge').textContent = athlete.sport;
+            document.getElementById('profil-hero-name').textContent = athlete.name;
+            document.getElementById('profil-hero-country').textContent = `${athlete.flag} ${athlete.country}`;
+
+            // Informations rapides
+            const infoGrid = document.getElementById('profil-info-grid');
+            const infoData = {
+                "Nom complet": athlete.name,
+                "Pays": `${athlete.flag} ${athlete.country}`,
+                "Poste": athlete.poste,
+                "Discipline": athlete.discipline
+            };
+            
+            infoGrid.innerHTML = Object.entries(infoData).map(([label, value]) => `
+                <div class="profil-info-item">
+                    <div class="profil-info-label">${label}</div>
+                    <div class="profil-info-value">${value}</div>
+                </div>
+            `).join('');
+
+            // Biographie
+            document.getElementById('profil-bio-text').textContent = athlete.bio;
+
+            // Statistiques
+            const statsGrid = document.getElementById('profil-stats-grid');
+            statsGrid.innerHTML = Object.entries(athlete.stats).map(([label, value]) => `
+                <div class="profil-stat-card">
+                    <div class="profil-stat-value">${value}</div>
+                    <div class="profil-stat-label">${label}</div>
+                </div>
+            `).join('');
+
+            // Palmarès
+            const achievementsList = document.getElementById('profil-achievements-list');
+            achievementsList.innerHTML = athlete.achievements.map(achievement => `
+                <li>${achievement}</li>
+            `).join('');
+
+            // Articles liés
+            const relatedArticles = Object.values(articlesData)
+                .filter(article => article.category === athlete.discipline)
+                .slice(0, 3);
+
+            const articlesGrid = document.getElementById('profil-articles-grid');
+            if (relatedArticles.length > 0) {
+                articlesGrid.innerHTML = relatedArticles.map(article => `
+                    <a href="article.html?id=${article.id}" class="actualite-card" style="text-decoration:none;">
+                        <div class="actualite-image-wrapper">
+                            <img src="${article.image}" alt="${article.title}" class="actualite-image">
+                            <span class="actualite-category">${article.sport}</span>
+                        </div>
+                        <div class="actualite-content">
+                            <p class="actualite-date">${article.date}</p>
+                            <h3 class="actualite-title">${article.title}</h3>
+                            <p class="actualite-excerpt">${article.content.replace(/<[^>]*>/g, '').substring(0, 100)}...</p>
+                            <span class="read-more">Lire la suite →</span>
+                        </div>
+                    </a>
+                `).join('');
+            } else {
+                articlesGrid.innerHTML = '<p style="text-align:center; color:#666;">Aucun article disponible</p>';
+            }
+        });
+
+        // Dropdown menu toggle
+        function toggleMenu(menuId) {
+            const menu = document.getElementById(menuId);
+            if (menu) {
+                menu.classList.toggle('show');
+            }
+        }
+
+        // Fermer les dropdowns
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                const dropdowns = document.querySelectorAll('.dropdown-content');
+                dropdowns.forEach(menu => {
+                    if (menu.classList.contains('show')) {
+                        menu.classList.remove('show');
+                    }
+                });
+            }
+        };
+    </script>
+    
+    <!-- Navigation universelle -->
+    <script src="universal-navigation.js"></script>
+    
+    <!-- Chatbot -->
+    <link rel="stylesheet" href="chatbot.css">
+    <script src="chatbot.js"></script>
+    <script src="formsubmit-helper.js"></script>
+</body>
+</html>

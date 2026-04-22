@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Connexion</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .admin-login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f783c 0%, #0a5a2d 100%);
+            padding: 20px;
+        }
+        
+        .admin-login-card {
+            background: white;
+            border-radius: 16px;
+            padding: 48px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .admin-login-logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .admin-login-logo img {
+            height: 60px;
+        }
+        
+        .admin-login-title {
+            color: #1a1a1a;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        
+        .admin-login-subtitle {
+            color: #666;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .admin-form-group {
+            margin-bottom: 24px;
+        }
+        
+        .admin-form-label {
+            display: block;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .admin-form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-form-input:focus {
+            outline: none;
+            border-color: #0f783c;
+            box-shadow: 0 0 0 3px rgba(15, 120, 60, 0.1);
+        }
+        
+        .admin-btn-login {
+            width: 100%;
+            padding: 16px;
+            background: #0f783c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-btn-login:hover {
+            background: #0a5a2d;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(15, 120, 60, 0.3);
+        }
+        
+        .admin-error {
+            background: #fee;
+            color: #c33;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-login-container">
+        <div class="admin-login-card">
+            <div class="admin-login-logo">
+                <img src="images/version logo sport africain_logo original.png" alt="Sport Africain">
+            </div>
+            
+            <h1 class="admin-login-title">Administration</h1>
+            <p class="admin-login-subtitle">Connectez-vous pour gérer le site</p>
+            
+            <div id="error-message" class="admin-error"></div>
+            
+            <form id="login-form">
+                <div class="admin-form-group">
+                    <label class="admin-form-label">Email</label>
+                    <input type="email" class="admin-form-input" id="email" placeholder="admin@sportafricain.com" required>
+                </div>
+                
+                <div class="admin-form-group">
+                    <label class="admin-form-label">Mot de passe</label>
+                    <input type="password" class="admin-form-input" id="password" placeholder="••••••••" required>
+                </div>
+                
+                <button type="submit" class="admin-btn-login">Se connecter</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="auth-helper.js"></script>
+    <script>
+        // Vérifier si déjà connecté
+        if (AuthHelper.isAuthenticated()) {
+            window.location.href = 'admin-dashboard.html';
+        }
+
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('error-message');
+            const submitBtn = this.querySelector('button[type="submit"]');
+            
+            // Désactiver le bouton pendant la requête
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Connexion...';
+            errorDiv.style.display = 'none';
+            
+            try {
+                // Connexion via l'API
+                await AuthHelper.login(email, password);
+                
+                // Redirection vers le dashboard
+                window.location.href = 'admin-dashboard.html';
+            } catch (error) {
+                // Afficher l'erreur
+                errorDiv.textContent = error.message || 'Email ou mot de passe incorrect';
+                errorDiv.style.display = 'block';
+                
+                // Réactiver le bouton
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Se connecter';
+            }
+        });
+    </script>
+</body>
+</html>

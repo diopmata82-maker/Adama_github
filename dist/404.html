@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page non trouvée - Sport Africain</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <a href="index.html">
+                    <img src="images/version logo sport africain_logo original.png" alt="Sport Africain">
+                </a>
+            </div>
+            
+            <div class="navbar-menu">
+                <a href="index.html" class="navbar-link">Accueil</a>
+                
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="toggleMenu('actualites-menu')">Actualités ▼</button>
+                    <div id="actualites-menu" class="dropdown-content">
+                        <a href="actualites.html">Toutes les actualités</a>
+                        <a href="actualites-football.html">Football</a>
+                        <a href="actualites-basketball.html">Basketball</a>
+                        <a href="actualites-athletisme.html">Athlétisme</a>
+                        <a href="actualites-lutte.html">Lutte</a>
+                    </div>
+                </div>
+                
+                <a href="podcast.html" class="navbar-link">Podcasts</a>
+                <a href="interview.html" class="navbar-link">Interviews</a>
+            </div>
+            
+            <div class="navbar-actions">
+                <a href="contact.html" class="navbar-link">Contact</a>
+                <a href="abonnement.html" class="btn btn-subscribe">S'abonner</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page 404 -->
+    <section class="error-page">
+        <div class="error-container">
+            <h1 class="error-code">404</h1>
+            <h2 class="error-title">Page non trouvée</h2>
+            <p class="error-message">La page que vous cherchez n'existe pas.</p>
+            <button class="btn-error" onclick="window.location.href='index.html'">Retour à l'accueil</button>
+        </div>
+    </section>
+
+    <script>
+        // Dropdown menu toggle
+        function toggleMenu(menuId) {
+            const menu = document.getElementById(menuId);
+            if (menu) {
+                menu.classList.toggle('show');
+            }
+        }
+
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                const dropdowns = document.getElementsByClassName('dropdown-content');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

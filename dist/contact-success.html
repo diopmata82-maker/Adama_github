@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Envoye - Sport Africain</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <a href="index.html">
+                    <img src="images/version logo sport africain_logo original.png" alt="Sport Africain">
+                </a>
+            </div>
+
+            <div class="navbar-menu">
+                <a href="index.html" class="navbar-link">Accueil</a>
+
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="toggleMenu('actualites-menu')">Actualites ▼</button>
+                    <div id="actualites-menu" class="dropdown-content">
+                        <a href="actualites.html">Toutes les actualites</a>
+                        <a href="actualites-football.html">Football</a>
+                        <a href="actualites-basketball.html">Basketball</a>
+                        <a href="actualites-athletisme.html">Athletisme</a>
+                        <a href="actualites-lutte.html">Lutte</a>
+                    </div>
+                </div>
+
+                <a href="podcast.html" class="navbar-link">Podcasts</a>
+                <a href="interview.html" class="navbar-link">Interviews</a>
+                <a href="about.html" class="navbar-link">A propos</a>
+            </div>
+
+            <div class="navbar-actions">
+                <a href="contact.html" class="navbar-link">Contact</a>
+                <a href="abonnement.html" class="btn btn-subscribe">S'abonner</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="success-page">
+        <div class="success-container">
+            <div class="success-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#0f783c" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+            </div>
+            <h1 class="success-title">Message bien envoye</h1>
+            <p class="success-message">Merci pour votre message. Notre equipe l'a bien recu et reviendra vers vous des que possible.</p>
+            <button class="btn-success" onclick="window.location.href='index.html'">Retour a l'accueil</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="images/version logo sport africain_logo original.png" alt="Sport Africain">
+                    </div>
+                    <p class="footer-description">Votre source d'information pour le sport africain. Actualites, analyses et resultats en temps reel.</p>
+                </div>
+
+                <div class="footer-column">
+                    <h4 class="footer-title">Liens</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html" class="footer-link">Accueil</a></li>
+                        <li><a href="actualites.html" class="footer-link">Actualites</a></li>
+                        <li><a href="podcast.html" class="footer-link">Podcasts</a></li>
+                        <li><a href="interview.html" class="footer-link">Interviews</a></li>
+                        <li><a href="about.html" class="footer-link">A propos</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4 class="footer-title">Contact</h4>
+                    <div class="footer-contact-item">
+                        <strong>Email:</strong><br>
+                        <a href="mailto:sportafricainpro@gmail.com" style="color: #0f783c; text-decoration: none;">sportafricainpro@gmail.com</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <strong>Telephone:</strong><br>
+                        <a href="tel:+221778211748" style="color: #a3a3a3; text-decoration: none;">+221 77 821 17 48</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2026 Sport Africain. Tous droits reserves.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu(menuId) {
+            const menu = document.getElementById(menuId);
+            if (menu) {
+                menu.classList.toggle('show');
+            }
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                const dropdowns = document.getElementsByClassName('dropdown-content');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        };
+    </script>
+</body>
+</html>
