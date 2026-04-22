@@ -88,7 +88,7 @@
             <!-- Formulaire de contact -->
             <div class="contact-content">
                 <h2 class="section-title">Envoyez-nous un message</h2>
-                <form id="contact-form" class="contact-form">
+                <form id="contact-form" class="contact-form" action="https://formsubmit.co/e9ed8af87813a6662c1e2bb1b1c02be1" method="POST" accept-charset="UTF-8">
                     <div class="form-group">
                         <label for="nom" class="form-label">Nom</label>
                         <input type="text" id="nom" name="from_name" class="form-input" placeholder="Votre nom complet" required>
@@ -121,6 +121,8 @@
                         <span class="btn-text">Envoyer</span>
                         <span class="btn-loading" style="display: none;">Envoi en cours...</span>
                     </button>
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_subject" value="Nouveau message Sport Africain">
                     
                     <div id="form-message" style="margin-top: 15px; text-align: center; font-size: 14px;"></div>
                 </form>
