@@ -29,7 +29,7 @@ class SportAfricainChatbot {
                 <div class="chat-header">
                     <div class="chat-header-info">
                         <div class="chat-avatar">
-                            <img src="version logo sport africain_logo original.png" alt="Sport Africain">
+                            <img src="images/version logo sport africain_logo original.png" alt="Sport Africain">
                         </div>
                         <div class="chat-header-text">
                             <h3>Sport Africain</h3>
@@ -123,7 +123,7 @@ class SportAfricainChatbot {
         
         messageDiv.innerHTML = `
             <div class="message-avatar">
-                <img src="version logo sport africain_logo original.png" alt="Bot">
+                <img src="images/version logo sport africain_logo original.png" alt="Bot">
             </div>
             <div class="message-bubble">
                 <p>${text}</p>
