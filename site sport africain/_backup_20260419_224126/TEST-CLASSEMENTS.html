@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Classements Dynamiques</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #0B0F0C;
+            color: white;
+        }
+        h1 {
+            color: #FFDE00;
+            text-align: center;
+        }
+        .test-section {
+            background: #1a1a1a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 2px solid #1E7F4F;
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success {
+            background: #1E7F4F;
+            color: white;
+        }
+        .error {
+            background: #dc2626;
+            color: white;
+        }
+        .info {
+            background: #3b82f6;
+            color: white;
+        }
+        pre {
+            background: #000;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .link-test {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background: #1E7F4F;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .link-test:hover {
+            background: #FFDE00;
+            color: #0B0F0C;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test du Système de Classements Dynamiques</h1>
+    
+    <div class="test-section">
+        <h2>📊 Vérification des Données</h2>
+        <div id="data-check"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🔗 Liens de Test</h2>
+        <p>Cliquez sur ces liens pour tester chaque page de classement :</p>
+        <a href="classement-football.html" class="link-test">⚽ Football</a>
+        <a href="classement-basketball.html" class="link-test">🏀 Basketball</a>
+        <a href="classement-athletisme.html" class="link-test">🏃 Athlétisme</a>
+        <a href="classement-lutte.html" class="link-test">🤼 Lutte</a>
+    </div>
+    
+    <div class="test-section">
+        <h2>📋 Structure des Données</h2>
+        <div id="data-structure"></div>
+    </div>
+
+    <script src="classements-data.js"></script>
+    <script>
+        // Test 1: Vérifier que les données sont chargées
+        const dataCheck = document.getElementById('data-check');
+        
+        if (typeof classementsData !== 'undefined') {
+            dataCheck.innerHTML += '<div class="test-result success">✅ classementsData est chargé</div>';
+            
+            // Vérifier chaque discipline
+            const disciplines = ['football', 'basketball', 'athletisme', 'lutte'];
+            disciplines.forEach(discipline => {
+                if (classementsData[discipline]) {
+                    dataCheck.innerHTML += `<div class="test-result success">✅ ${discipline}: données présentes</div>`;
+                    
+                    // Vérifier les sections
+                    const sections = ['hommes', 'femmes', 'performance'];
+                    sections.forEach(section => {
+                        if (classementsData[discipline][section]) {
+                            const count = classementsData[discipline][section].length;
+                            dataCheck.innerHTML += `<div class="test-result info">ℹ️ ${discipline}.${section}: ${count} entrées</div>`;
+                        } else if (section === 'femmes' && discipline === 'lutte') {
+                            // La lutte n'a pas de section femmes, c'est normal
+                            dataCheck.innerHTML += `<div class="test-result info">ℹ️ ${discipline}.${section}: non applicable</div>`;
+                        } else {
+                            dataCheck.innerHTML += `<div class="test-result error">❌ ${discipline}.${section}: manquant</div>`;
+                        }
+                    });
+                } else {
+                    dataCheck.innerHTML += `<div class="test-result error">❌ ${discipline}: données manquantes</div>`;
+                }
+            });
+        } else {
+            dataCheck.innerHTML = '<div class="test-result error">❌ classementsData n\'est pas chargé</div>';
+        }
+        
+        // Test 2: Afficher la structure des données
+        const dataStructure = document.getElementById('data-structure');
+        if (typeof classementsData !== 'undefined') {
+            // Exemple de structure pour le football
+            const example = {
+                football: {
+                    hommes: classementsData.football.hommes.slice(0, 2),
+                    femmes: classementsData.football.femmes.slice(0, 1),
+                    performance: classementsData.football.performance.slice(0, 2)
+                }
+            };
+            dataStructure.innerHTML = '<pre>' + JSON.stringify(example, null, 2) + '</pre>';
+        }
+    </script>
+</body>
+</html>

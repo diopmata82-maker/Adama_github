@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Fonctions Articles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #0B0F0C;
+            color: white;
+        }
+        h1 { color: #1E7F4F; }
+        h2 { color: #FFDE00; margin-top: 30px; }
+        .test-section {
+            background: #111;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 4px solid #1E7F4F;
+        }
+        .article-card {
+            background: #1a1a1a;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .article-card h3 {
+            color: #1E7F4F;
+            margin: 0 0 10px 0;
+        }
+        .article-card p {
+            margin: 5px 0;
+            color: #ccc;
+        }
+        button {
+            background: #1E7F4F;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #16663f;
+        }
+        code {
+            background: #000;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #FFDE00;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test des Fonctions Articles</h1>
+    <p>Cette page teste toutes les fonctions du système d'articles dynamique.</p>
+
+    <!-- Test 1: Obtenir un article par ID -->
+    <div class="test-section">
+        <h2>1. Obtenir un article par ID</h2>
+        <p>Fonction: <code>getArticleById(id)</code></p>
+        <button onclick="testGetArticleById(1)">Tester avec ID 1</button>
+        <button onclick="testGetArticleById(3)">Tester avec ID 3</button>
+        <button onclick="testGetArticleById(99)">Tester avec ID 99 (inexistant)</button>
+        <div id="result-1"></div>
+    </div>
+
+    <!-- Test 2: Obtenir tous les articles -->
+    <div class="test-section">
+        <h2>2. Obtenir tous les articles</h2>
+        <p>Fonction: <code>getAllArticles()</code></p>
+        <button onclick="testGetAllArticles()">Afficher tous les articles</button>
+        <div id="result-2"></div>
+    </div>
+
+    <!-- Test 3: Filtrer par discipline -->
+    <div class="test-section">
+        <h2>3. Filtrer par discipline</h2>
+        <p>Fonction: <code>getArticlesByDiscipline(discipline)</code></p>
+        <button onclick="testFilterByDiscipline('football')">Football</button>
+        <button onclick="testFilterByDiscipline('basketball')">Basketball</button>
+        <button onclick="testFilterByDiscipline('athletisme')">Athlétisme</button>
+        <button onclick="testFilterByDiscipline('lutte')">Lutte</button>
+        <div id="result-3"></div>
+    </div>
+
+    <!-- Test 4: Articles similaires -->
+    <div class="test-section">
+        <h2>4. Articles similaires (même discipline)</h2>
+        <p>Fonction: <code>getRelatedArticles(articleId)</code></p>
+        <button onclick="testRelatedArticles(1)">Articles similaires à l'ID 1</button>
+        <button onclick="testRelatedArticles(2)">Articles similaires à l'ID 2</button>
+        <button onclick="testRelatedArticles(4)">Articles similaires à l'ID 4</button>
+        <div id="result-4"></div>
+    </div>
+
+    <!-- Test 5: Navigation précédent/suivant -->
+    <div class="test-section">
+        <h2>5. Navigation précédent/suivant</h2>
+        <p>Fonctions: <code>getPreviousArticle(id)</code> et <code>getNextArticle(id)</code></p>
+        <button onclick="testNavigation(1)">Navigation depuis ID 1</button>
+        <button onclick="testNavigation(3)">Navigation depuis ID 3</button>
+        <button onclick="testNavigation(6)">Navigation depuis ID 6</button>
+        <div id="result-5"></div>
+    </div>
+
+    <!-- Test 6: Titre dynamique -->
+    <div class="test-section">
+        <h2>6. Titre de page dynamique</h2>
+        <p>Le titre de la page change selon l'article: <code>article.title + ' | Sport Africain'</code></p>
+        <p>Titre actuel: <strong id="current-title"></strong></p>
+        <button onclick="testDynamicTitle(1)">Changer pour article 1</button>
+        <button onclick="testDynamicTitle(5)">Changer pour article 5</button>
+    </div>
+
+    <script src="articles-data.js"></script>
+    <script>
+        // Afficher le titre actuel
+        document.getElementById('current-title').textContent = document.title;
+
+        // Test 1: Obtenir un article par ID
+        function testGetArticleById(id) {
+            const article = getArticleById(id);
+            const resultDiv = document.getElementById('result-1');
+            
+            if (article) {
+                resultDiv.innerHTML = `
+                    <div class="article-card">
+                        <h3>${article.title}</h3>
+                        <p><strong>ID:</strong> ${article.id}</p>
+                        <p><strong>Sport:</strong> ${article.sport}</p>
+                        <p><strong>Discipline:</strong> ${article.discipline}</p>
+                        <p><strong>Date:</strong> ${article.date}</p>
+                        <p><strong>Auteur:</strong> ${article.author}</p>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `<p style="color: #ff4444;">❌ Article avec ID ${id} non trouvé</p>`;
+            }
+        }
+
+        // Test 2: Obtenir tous les articles
+        function testGetAllArticles() {
+            const articles = getAllArticles();
+            const resultDiv = document.getElementById('result-2');
+            
+            resultDiv.innerHTML = `<p>✅ Total: ${articles.length} articles</p>`;
+            articles.forEach(article => {
+                resultDiv.innerHTML += `
+                    <div class="article-card">
+                        <h3>${article.id}. ${article.title}</h3>
+                        <p><strong>Discipline:</strong> ${article.discipline}</p>
+                    </div>
+                `;
+            });
+        }
+
+        // Test 3: Filtrer par discipline
+        function testFilterByDiscipline(discipline) {
+            const articles = getArticlesByDiscipline(discipline);
+            const resultDiv = document.getElementById('result-3');
+            
+            resultDiv.innerHTML = `<p>✅ ${articles.length} article(s) trouvé(s) pour <strong>${discipline}</strong></p>`;
+            articles.forEach(article => {
+                resultDiv.innerHTML += `
+                    <div class="article-card">
+                        <h3>${article.title}</h3>
+                        <p><strong>Date:</strong> ${article.date}</p>
+                    </div>
+                `;
+            });
+        }
+
+        // Test 4: Articles similaires
+        function testRelatedArticles(articleId) {
+            const currentArticle = getArticleById(articleId);
+            const related = getRelatedArticles(articleId);
+            const resultDiv = document.getElementById('result-4');
+            
+            resultDiv.innerHTML = `
+                <p><strong>Article actuel:</strong> ${currentArticle.title} (${currentArticle.discipline})</p>
+                <p>✅ ${related.length} article(s) similaire(s) trouvé(s)</p>
+            `;
+            
+            related.forEach(article => {
+                resultDiv.innerHTML += `
+                    <div class="article-card">
+                        <h3>${article.title}</h3>
+                        <p><strong>Discipline:</strong> ${article.discipline}</p>
+                    </div>
+                `;
+            });
+        }
+
+        // Test 5: Navigation
+        function testNavigation(articleId) {
+            const current = getArticleById(articleId);
+            const prev = getPreviousArticle(articleId);
+            const next = getNextArticle(articleId);
+            const resultDiv = document.getElementById('result-5');
+            
+            resultDiv.innerHTML = `<p><strong>Article actuel:</strong> ${current.title}</p>`;
+            
+            if (prev) {
+                resultDiv.innerHTML += `
+                    <div class="article-card">
+                        <h3>⬅️ Précédent: ${prev.title}</h3>
+                        <p><strong>ID:</strong> ${prev.id}</p>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML += `<p style="color: #ff4444;">❌ Pas d'article précédent</p>`;
+            }
+            
+            if (next) {
+                resultDiv.innerHTML += `
+                    <div class="article-card">
+                        <h3>➡️ Suivant: ${next.title}</h3>
+                        <p><strong>ID:</strong> ${next.id}</p>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML += `<p style="color: #ff4444;">❌ Pas d'article suivant</p>`;
+            }
+        }
+
+        // Test 6: Titre dynamique
+        function testDynamicTitle(articleId) {
+            const article = getArticleById(articleId);
+            if (article) {
+                document.title = article.title + ' | Sport Africain';
+                document.getElementById('current-title').textContent = document.title;
+            }
+        }
+    </script>
+</body>
+</html>

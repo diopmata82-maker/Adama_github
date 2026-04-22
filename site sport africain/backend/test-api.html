@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API - Sport Africain</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #0f783c;
+            margin-bottom: 32px;
+        }
+
+        .test-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .test-section h2 {
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            font-size: 20px;
+        }
+
+        button {
+            background: #0f783c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 12px;
+            margin-bottom: 12px;
+        }
+
+        button:hover {
+            background: #0a5a2d;
+        }
+
+        button.secondary {
+            background: #666;
+        }
+
+        button.secondary:hover {
+            background: #555;
+        }
+
+        .result {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .success {
+            color: #0f783c;
+            font-weight: 600;
+        }
+
+        .error {
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        .info {
+            background: #e3f2fd;
+            border-left: 4px solid #1976d2;
+            padding: 12px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0f783c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test API - Sport Africain</h1>
+
+        <div class="info">
+            <strong>ℹ️ Information :</strong> Assurez-vous que le serveur backend est démarré sur http://localhost:3000
+        </div>
+
+        <!-- Test 1 : Connexion serveur -->
+        <div class="test-section">
+            <h2>1. Test de connexion au serveur</h2>
+            <button onclick="testServerConnection()">Tester la connexion</button>
+            <div id="result-connection" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Test 2 : Créer un admin -->
+        <div class="test-section">
+            <h2>2. Créer un administrateur</h2>
+            <input type="email" id="admin-email" placeholder="Email" value="admin@sportafricain.com">
+            <input type="password" id="admin-password" placeholder="Mot de passe" value="admin123">
+            <input type="text" id="admin-name" placeholder="Nom" value="Administrateur">
+            <button onclick="createAdmin()">Créer l'admin</button>
+            <div id="result-create-admin" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Test 3 : Connexion admin -->
+        <div class="test-section">
+            <h2>3. Connexion administrateur</h2>
+            <input type="email" id="login-email" placeholder="Email" value="admin@sportafricain.com">
+            <input type="password" id="login-password" placeholder="Mot de passe" value="admin123">
+            <button onclick="loginAdmin()">Se connecter</button>
+            <div id="result-login" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Test 4 : Récupérer les articles -->
+        <div class="test-section">
+            <h2>4. Récupérer les articles (PUBLIC)</h2>
+            <button onclick="getArticles()">Récupérer les articles</button>
+            <div id="result-articles" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Test 5 : Créer un article -->
+        <div class="test-section">
+            <h2>5. Créer un article (ADMIN)</h2>
+            <p style="color: #666; font-size: 14px; margin-bottom: 12px;">
+                ⚠️ Vous devez d'abord vous connecter (test 3)
+            </p>
+            <button onclick="createArticle()">Créer un article de test</button>
+            <div id="result-create-article" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Test 6 : Récupérer les athlètes -->
+        <div class="test-section">
+            <h2>6. Récupérer les athlètes (PUBLIC)</h2>
+            <button onclick="getAthletes()">Récupérer les athlètes</button>
+            <div id="result-athletes" class="result" style="display:none;"></div>
+        </div>
+
+        <!-- Test 7 : Migration des données -->
+        <div class="test-section">
+            <h2>7. Migration des données</h2>
+            <p style="color: #666; font-size: 14px; margin-bottom: 12px;">
+                ⚠️ Cette action doit être exécutée depuis le terminal backend
+            </p>
+            <code style="background: #f8f9fa; padding: 8px 12px; border-radius: 4px; display: block;">
+                cd backend && npm run migrate
+            </code>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+        let token = null;
+
+        // Test 1 : Connexion serveur
+        async function testServerConnection() {
+            const resultDiv = document.getElementById('result-connection');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Test en cours...';
+
+            try {
+                const response = await fetch('http://localhost:3000/');
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <span class="success">✅ Connexion réussie !</span><br><br>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <span class="error">❌ Erreur de connexion</span><br><br>
+                    ${error.message}<br><br>
+                    Assurez-vous que le serveur est démarré : <code>cd backend && npm run dev</code>
+                `;
+            }
+        }
+
+        // Test 2 : Créer un admin
+        async function createAdmin() {
+            const resultDiv = document.getElementById('result-create-admin');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Création en cours...';
+
+            const email = document.getElementById('admin-email').value;
+            const password = document.getElementById('admin-password').value;
+            const name = document.getElementById('admin-name').value;
+
+            try {
+                const response = await fetch(`${API_URL}/auth/create-admin`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, name })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <span class="success">✅ Admin créé avec succès !</span><br><br>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <span class="error">❌ Erreur</span><br><br>
+                        ${data.message || 'Erreur inconnue'}
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <span class="error">❌ Erreur</span><br><br>
+                    ${error.message}
+                `;
+            }
+        }
+
+        // Test 3 : Connexion admin
+        async function loginAdmin() {
+            const resultDiv = document.getElementById('result-login');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Connexion en cours...';
+
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    token = data.token;
+                    resultDiv.innerHTML = `
+                        <span class="success">✅ Connexion réussie !</span><br><br>
+                        Token sauvegardé pour les prochains tests<br><br>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <span class="error">❌ Erreur de connexion</span><br><br>
+                        ${data.message || 'Email ou mot de passe incorrect'}
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <span class="error">❌ Erreur</span><br><br>
+                    ${error.message}
+                `;
+            }
+        }
+
+        // Test 4 : Récupérer les articles
+        async function getArticles() {
+            const resultDiv = document.getElementById('result-articles');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Chargement...';
+
+            try {
+                const response = await fetch(`${API_URL}/articles`);
+                const data = await response.json();
+
+                resultDiv.innerHTML = `
+                    <span class="success">✅ ${data.length} article(s) trouvé(s)</span><br><br>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <span class="error">❌ Erreur</span><br><br>
+                    ${error.message}
+                `;
+            }
+        }
+
+        // Test 5 : Créer un article
+        async function createArticle() {
+            const resultDiv = document.getElementById('result-create-article');
+            resultDiv.style.display = 'block';
+
+            if (!token) {
+                resultDiv.innerHTML = `
+                    <span class="error">❌ Vous devez d'abord vous connecter (test 3)</span>
+                `;
+                return;
+            }
+
+            resultDiv.innerHTML = 'Création en cours...';
+
+            const article = {
+                title: "Article de test - " + new Date().toLocaleString(),
+                category: "football",
+                image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800",
+                author: "Test API",
+                content: "<p>Ceci est un article de test créé via l'API.</p>"
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/articles`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(article)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <span class="success">✅ Article créé avec succès !</span><br><br>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <span class="error">❌ Erreur</span><br><br>
+                        ${data.message || 'Erreur inconnue'}
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <span class="error">❌ Erreur</span><br><br>
+                    ${error.message}
+                `;
+            }
+        }
+
+        // Test 6 : Récupérer les athlètes
+        async function getAthletes() {
+            const resultDiv = document.getElementById('result-athletes');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Chargement...';
+
+            try {
+                const response = await fetch(`${API_URL}/athletes`);
+                const data = await response.json();
+
+                resultDiv.innerHTML = `
+                    <span class="success">✅ ${data.length} athlète(s) trouvé(s)</span><br><br>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <span class="error">❌ Erreur</span><br><br>
+                    ${error.message}
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

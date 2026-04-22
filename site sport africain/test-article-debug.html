@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Article Debug</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0B0F0C;
+            color: white;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .test-section {
+            background: #1a1a1a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 2px solid #1E7F4F;
+        }
+        .success { color: #1E7F4F; }
+        .error { color: #ff4444; }
+        .info { color: #4a9eff; }
+        pre {
+            background: #000;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        .test-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #1E7F4F;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        .test-link:hover {
+            background: #FFDE00;
+            color: #0B0F0C;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Test Debug Système Articles</h1>
+    
+    <div class="test-section">
+        <h2>📊 Test 1: Chargement de articles-data.js</h2>
+        <div id="test1"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>📝 Test 2: Contenu des Articles</h2>
+        <div id="test2"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🔗 Test 3: Liens de Test</h2>
+        <p>Cliquez sur ces liens pour tester le chargement réel:</p>
+        <div id="test-links"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🧪 Test 4: Simulation Chargement</h2>
+        <div id="test4"></div>
+    </div>
+
+    <script src="articles-data.js"></script>
+    <script>
+        const output = {
+            test1: document.getElementById('test1'),
+            test2: document.getElementById('test2'),
+            testLinks: document.getElementById('test-links'),
+            test4: document.getElementById('test4')
+        };
+        
+        // Test 1: Vérifier le chargement
+        console.log('🔍 Test 1: Vérification du chargement...');
+        if (typeof articlesData === 'undefined') {
+            output.test1.innerHTML = '<p class="error">❌ articlesData n\'est pas chargé!</p>';
+        } else {
+            output.test1.innerHTML = '<p class="success">✅ articlesData est chargé</p>';
+            output.test1.innerHTML += `<p class="info">Nombre d'articles: ${Object.keys(articlesData).length}</p>`;
+            output.test1.innerHTML += `<p class="info">IDs disponibles: ${Object.keys(articlesData).join(', ')}</p>`;
+        }
+        
+        // Test 2: Vérifier le contenu
+        console.log('🔍 Test 2: Vérification du contenu...');
+        if (typeof articlesData !== 'undefined') {
+            let html = '<table style="width:100%; color:#ccc; font-size:12px; border-collapse: collapse;">';
+            html += '<tr style="background:#333;"><th style="padding:10px; text-align:left;">ID</th><th style="padding:10px; text-align:left;">Titre</th><th style="padding:10px; text-align:left;">Catégorie</th><th style="padding:10px; text-align:left;">Contenu</th></tr>';
+            
+            Object.values(articlesData).forEach(article => {
+                const contentLength = article.content ? article.content.length : 0;
+                const hasContent = contentLength > 100;
+                
+                html += `<tr style="border-bottom:1px solid #333;">
+                    <td style="padding:10px;">${article.id}</td>
+                    <td style="padding:10px;">${article.title.substring(0, 40)}...</td>
+                    <td style="padding:10px;">${article.category}</td>
+                    <td style="padding:10px;">${hasContent ? '<span class="success">✅ ' + contentLength + ' chars</span>' : '<span class="error">❌ VIDE</span>'}</td>
+                </tr>`;
+            });
+            
+            html += '</table>';
+            output.test2.innerHTML = html;
+        }
+        
+        // Test 3: Liens de test
+        if (typeof articlesData !== 'undefined') {
+            Object.keys(articlesData).forEach(id => {
+                const link = document.createElement('a');
+                link.href = `article.html?id=${id}`;
+                link.className = 'test-link';
+                link.textContent = `Article ${id}`;
+                output.testLinks.appendChild(link);
+            });
+        }
+        
+        // Test 4: Simulation
+        console.log('🔍 Test 4: Simulation de chargement...');
+        if (typeof articlesData !== 'undefined') {
+            const testId = 1;
+            const testArticle = articlesData[testId];
+            
+            if (testArticle) {
+                output.test4.innerHTML = '<p class="success">✅ Simulation réussie pour l\'article ' + testId + '</p>';
+                output.test4.innerHTML += '<div style="background:#111; padding:15px; margin:10px 0; border-left:3px solid #1E7F4F;">';
+                output.test4.innerHTML += '<p><strong>Titre:</strong> ' + testArticle.title + '</p>';
+                output.test4.innerHTML += '<p><strong>Catégorie:</strong> ' + testArticle.category + '</p>';
+                output.test4.innerHTML += '<p><strong>Date:</strong> ' + testArticle.date + '</p>';
+                output.test4.innerHTML += '<p><strong>Contenu (premiers 300 chars):</strong></p>';
+                output.test4.innerHTML += '<pre>' + testArticle.content.substring(0, 300) + '...</pre>';
+                output.test4.innerHTML += '</div>';
+                
+                // Test innerHTML
+                const testDiv = document.createElement('div');
+                testDiv.innerHTML = testArticle.content;
+                output.test4.innerHTML += '<p class="success">✅ innerHTML fonctionne: ' + testDiv.children.length + ' éléments HTML créés</p>';
+                
+                // Afficher le contenu complet
+                output.test4.innerHTML += '<h3>Contenu HTML complet:</h3>';
+                output.test4.innerHTML += '<div style="background:#111; padding:20px; margin:10px 0; border:1px solid #333;">' + testArticle.content + '</div>';
+            } else {
+                output.test4.innerHTML = '<p class="error">❌ Article ' + testId + ' introuvable!</p>';
+            }
+        }
+        
+        console.log('🎉 Tests terminés!');
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Athlètes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #0B0F0C;
+            color: white;
+        }
+        h1 { color: #1E7F4F; }
+        h2 { color: #FFDE00; margin-top: 40px; }
+        
+        .test-section {
+            background: #111;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border-left: 4px solid #1E7F4F;
+        }
+        
+        button {
+            background: #1E7F4F;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background: #16663f;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #FFDE00;
+            font-size: 18px;
+        }
+        
+        .athlete-card {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            display: flex;
+            gap: 30px;
+            align-items: start;
+        }
+        
+        .athlete-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .athlete-info {
+            flex: 1;
+        }
+        
+        .athlete-name {
+            font-size: 32px;
+            color: #1E7F4F;
+            margin: 0 0 15px 0;
+        }
+        
+        .athlete-sport,
+        .athlete-country {
+            font-size: 18px;
+            margin: 8px 0;
+            color: #FFDE00;
+        }
+        
+        .athlete-description {
+            line-height: 1.8;
+            margin: 20px 0;
+            color: #ccc;
+        }
+        
+        .athlete-achievements {
+            margin: 20px 0;
+        }
+        
+        .athlete-achievements h3 {
+            color: #1E7F4F;
+            margin-bottom: 10px;
+        }
+        
+        .athlete-achievements ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .athlete-achievements li {
+            padding: 8px 0;
+            color: #ccc;
+        }
+        
+        .athlete-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #1E7F4F;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .athlete-link:hover {
+            color: #FFDE00;
+        }
+        
+        .athlete-source {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .athlete-card-mini {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 10px;
+        }
+        
+        .athlete-mini-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        
+        #athletes-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        code {
+            background: #000;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #FFDE00;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test API Athlètes - Sport Africain</h1>
+    <p>Système dynamique pour afficher les informations des sportifs africains</p>
+
+    <!-- Test 1: Afficher un athlète -->
+    <div class="test-section">
+        <h2>1. Afficher un athlète</h2>
+        <p>Fonction: <code>displayAthlete(name, containerId)</code></p>
+        
+        <button onclick="displayAthlete('Sadio Mané', 'athlete-info')">Sadio Mané</button>
+        <button onclick="displayAthlete('Joel Embiid', 'athlete-info')">Joel Embiid</button>
+        <button onclick="displayAthlete('Eliud Kipchoge', 'athlete-info')">Eliud Kipchoge</button>
+        <button onclick="displayAthlete('Ferdinand Omanyala', 'athlete-info')">Ferdinand Omanyala</button>
+        
+        <div id="athlete-info"></div>
+    </div>
+
+    <!-- Test 2: Afficher plusieurs athlètes -->
+    <div class="test-section">
+        <h2>2. Afficher plusieurs athlètes</h2>
+        <p>Fonction: <code>displayAthletesList(names, containerId)</code></p>
+        
+        <button onclick="showFootballPlayers()">Footballeurs</button>
+        <button onclick="showBasketballPlayers()">Basketteurs</button>
+        <button onclick="showAthletes()">Athlètes</button>
+        <button onclick="showAllSports()">Tous les sports</button>
+        
+        <div id="athletes-list"></div>
+    </div>
+
+    <!-- Test 3: Récupérer les données brutes -->
+    <div class="test-section">
+        <h2>3. Récupérer les données (console)</h2>
+        <p>Fonction: <code>getAthlete(name)</code></p>
+        
+        <button onclick="testGetAthlete('Sadio Mané')">Test Sadio Mané</button>
+        <button onclick="testGetAthlete('Joel Embiid')">Test Joel Embiid</button>
+        
+        <p style="color: #FFDE00;">Ouvrez la console (F12) pour voir les résultats</p>
+    </div>
+
+    <!-- Guide d'utilisation -->
+    <div class="test-section">
+        <h2>📖 Guide d'utilisation</h2>
+        
+        <h3 style="color: #1E7F4F;">1. Inclure le script</h3>
+        <pre style="background: #000; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>&lt;script src="athletes-api.js"&gt;&lt;/script&gt;</code></pre>
+        
+        <h3 style="color: #1E7F4F;">2. Afficher un athlète</h3>
+        <pre style="background: #000; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>// HTML
+&lt;div id="athlete-info"&gt;&lt;/div&gt;
+
+// JavaScript
+displayAthlete('Sadio Mané', 'athlete-info');</code></pre>
+        
+        <h3 style="color: #1E7F4F;">3. Afficher une liste</h3>
+        <pre style="background: #000; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>// HTML
+&lt;div id="athletes-list"&gt;&lt;/div&gt;
+
+// JavaScript
+const names = ['Sadio Mané', 'Joel Embiid', 'Eliud Kipchoge'];
+displayAthletesList(names, 'athletes-list');</code></pre>
+        
+        <h3 style="color: #1E7F4F;">4. Récupérer les données</h3>
+        <pre style="background: #000; padding: 15px; border-radius: 8px; overflow-x: auto;"><code>const athlete = await getAthlete('Sadio Mané');
+console.log(athlete.name);
+console.log(athlete.description);
+console.log(athlete.image);</code></pre>
+    </div>
+
+    <script src="athletes-api.js"></script>
+    <script>
+        // Fonctions de test
+        async function testGetAthlete(name) {
+            console.log(`\n=== Test: ${name} ===`);
+            const athlete = await getAthlete(name);
+            console.log('Données récupérées:', athlete);
+        }
+        
+        function showFootballPlayers() {
+            displayAthletesList(['Sadio Mané'], 'athletes-list');
+        }
+        
+        function showBasketballPlayers() {
+            displayAthletesList(['Joel Embiid'], 'athletes-list');
+        }
+        
+        function showAthletes() {
+            displayAthletesList(['Eliud Kipchoge', 'Ferdinand Omanyala'], 'athletes-list');
+        }
+        
+        function showAllSports() {
+            displayAthletesList([
+                'Sadio Mané',
+                'Joel Embiid',
+                'Eliud Kipchoge',
+                'Ferdinand Omanyala'
+            ], 'athletes-list');
+        }
+        
+        // Afficher un athlète par défaut
+        displayAthlete('Sadio Mané', 'athlete-info');
+    </script>
+</body>
+</html>

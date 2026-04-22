@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Système Articles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #0B0F0C;
+            color: white;
+        }
+        h1 {
+            color: #FFDE00;
+            text-align: center;
+        }
+        .test-section {
+            background: #1a1a1a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 2px solid #1E7F4F;
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success {
+            background: #1E7F4F;
+            color: white;
+        }
+        .error {
+            background: #dc2626;
+            color: white;
+        }
+        .info {
+            background: #3b82f6;
+            color: white;
+        }
+        .article-link {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background: #1E7F4F;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .article-link:hover {
+            background: #FFDE00;
+            color: #0B0F0C;
+        }
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .article-preview {
+            background: #111;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+        .article-preview h3 {
+            color: #FFDE00;
+            font-size: 16px;
+            margin: 0 0 8px 0;
+        }
+        .article-preview p {
+            color: #999;
+            font-size: 13px;
+            margin: 4px 0;
+        }
+        .category-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        .football { background: #1E7F4F; }
+        .basketball { background: #FF6B35; }
+        .athletisme { background: #4ECDC4; }
+        .lutte { background: #FFD700; color: #000; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test du Système d'Articles</h1>
+    
+    <div class="test-section">
+        <h2>📊 Vérification des Données</h2>
+        <div id="data-check"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>📝 Liste des Articles</h2>
+        <div id="articles-list"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🔗 Test des Liens</h2>
+        <p>Cliquez sur ces liens pour tester chaque article :</p>
+        <div id="article-links"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🔍 Test des Articles Similaires</h2>
+        <div id="similar-test"></div>
+    </div>
+
+    <script src="articles-data.js"></script>
+    <script>
+        // Test 1: Vérifier que les données sont chargées
+        const dataCheck = document.getElementById('data-check');
+        
+        if (typeof articlesData !== 'undefined') {
+            dataCheck.innerHTML += '<div class="test-result success">✅ articlesData est chargé</div>';
+            
+            const articleCount = Object.keys(articlesData).length;
+            dataCheck.innerHTML += `<div class="test-result info">ℹ️ Nombre d'articles: ${articleCount}</div>`;
+            
+            // Vérifier chaque article
+            let validArticles = 0;
+            let invalidArticles = 0;
+            
+            Object.values(articlesData).forEach(article => {
+                const hasRequiredFields = article.id && article.title && article.category && article.image && article.date && article.content;
+                if (hasRequiredFields) {
+                    validArticles++;
+                } else {
+                    invalidArticles++;
+                    dataCheck.innerHTML += `<div class="test-result error">❌ Article ${article.id}: champs manquants</div>`;
+                }
+            });
+            
+            dataCheck.innerHTML += `<div class="test-result success">✅ Articles valides: ${validArticles}</div>`;
+            if (invalidArticles > 0) {
+                dataCheck.innerHTML += `<div class="test-result error">❌ Articles invalides: ${invalidArticles}</div>`;
+            }
+        } else {
+            dataCheck.innerHTML = '<div class="test-result error">❌ articlesData n\'est pas chargé</div>';
+        }
+        
+        // Test 2: Afficher la liste des articles
+        const articlesList = document.getElementById('articles-list');
+        if (typeof articlesData !== 'undefined') {
+            const grid = document.createElement('div');
+            grid.className = 'article-grid';
+            
+            Object.values(articlesData).forEach(article => {
+                const preview = document.createElement('div');
+                preview.className = 'article-preview';
+                preview.innerHTML = `
+                    <h3>${article.title}</h3>
+                    <p>📅 ${article.date}</p>
+                    <p>✍️ ${article.author}</p>
+                    <span class="category-badge ${article.category}">${article.sport}</span>
+                `;
+                grid.appendChild(preview);
+            });
+            
+            articlesList.appendChild(grid);
+        }
+        
+        // Test 3: Générer les liens de test
+        const articleLinks = document.getElementById('article-links');
+        if (typeof articlesData !== 'undefined') {
+            Object.values(articlesData).forEach(article => {
+                const link = document.createElement('a');
+                link.href = `article.html?id=${article.id}`;
+                link.className = 'article-link';
+                link.textContent = `Article ${article.id}: ${article.title.substring(0, 30)}...`;
+                articleLinks.appendChild(link);
+            });
+        }
+        
+        // Test 4: Tester les articles similaires
+        const similarTest = document.getElementById('similar-test');
+        if (typeof articlesData !== 'undefined') {
+            const categories = {};
+            
+            // Grouper par catégorie
+            Object.values(articlesData).forEach(article => {
+                if (!categories[article.category]) {
+                    categories[article.category] = [];
+                }
+                categories[article.category].push(article);
+            });
+            
+            // Afficher le résumé
+            Object.keys(categories).forEach(category => {
+                const count = categories[category].length;
+                similarTest.innerHTML += `<div class="test-result info">ℹ️ ${category}: ${count} articles</div>`;
+            });
+            
+            // Test de la fonction de filtrage
+            const testArticleId = 1;
+            const testArticle = articlesData[testArticleId];
+            const similar = Object.values(articlesData)
+                .filter(a => a.category === testArticle.category && a.id !== testArticle.id)
+                .slice(0, 3);
+            
+            similarTest.innerHTML += `<div class="test-result success">✅ Test article ${testArticleId} (${testArticle.category}): ${similar.length} articles similaires trouvés</div>`;
+            similar.forEach(a => {
+                similarTest.innerHTML += `<div class="test-result info">→ Article ${a.id}: ${a.title}</div>`;
+            });
+        }
+    </script>
+</body>
+</html>
